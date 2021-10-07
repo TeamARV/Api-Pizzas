@@ -4,5 +4,15 @@
   "main": "index.js",
   "repository": "https://github.com/TeamARV/Api-Pizzas.git",
   "author": "TeamARV <andresriveravega@msn.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon servidorPizza.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
 }
