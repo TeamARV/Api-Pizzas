@@ -14,7 +14,7 @@ import cors from 'cors';
 
 
 
-const stringConexion = 'mongodb+srv://AdminPizzero:AdminPizzero@proyectopizzeria.yfcsk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const stringConexion = '';
 
 const client = new MongoClient(stringConexion, {
   useNewUrlParser: true,
