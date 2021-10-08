@@ -1,58 +1,116 @@
 
 /* const express = require('express'); */  //imports antiguos
 
-import  Express  from "express";
+import Express from 'express';
+import { MongoClient, ObjectId } from 'mongodb';
+
+import cors from 'cors';
 
 
+
+
+
+//instanciamos la clase mongo
+
+
+
+const stringConexion = 'mongodb+srv://AdminPizzero:AdminPizzero@proyectopizzeria.yfcsk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+const client = new MongoClient(stringConexion, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+/////
+
+let conexion;
 const app = Express()
 
 app.use(Express.json())  // agregar utilidad para manejar json
+app.use(cors());         // inicializo el cors que me permite peticiones de fuentes distintas
 
+// opciones orm :  mongoose, prisma // pero vamos usar nativo de mongodb driver
 
 //ruta lectura  get :D
 
 app.get("/productos" , (req,res)=>{
     console.log("alguien hizo get en la ruta /productos")
-    const productos =
-    [
-      { idProducto: 1, descripcionProducto: "Slim Pizza", valorProducto: 20000, inventarioProducto: 10 },
-      { idProducto: 2, descripcionProducto: "Mini Pizza", valorProducto: 15000, inventarioProducto: 10 },
-      { idProducto: 3, descripcionProducto: "Classic Pizza", valorProducto: 30000, inventarioProducto: 10 },
-      { idProducto: 4, descripcionProducto: "Mega Pizza", valorProducto: 50000, inventarioProducto: 10 },
-      { idProducto: 5, descripcionProducto: "Nerd Pizza", valorProducto: 60000, inventarioProducto: 10 },
+ 
+    conexion.collection("producto").find({}).limit(100).toArray( (err,result) =>{
 
-    ]
-    res.send(productos)
+        if(err){
+            res.status(500).send("error 400 al consultar productos")
+        }
+
+        else{
+            res.json(result)
+        }
+    })
+  
 } )
 //------------------------
 
-app.post("/productos/nuevo", (req,res) =>{
-    // agregar codigo para crear producto
+app.post('/productos/nuevo', (req, res) => {
+    console.log(req.body);
+    const datosProducto = req.body;
+    console.log('llaves: ', Object.keys(datosProducto));
 
-    console.log(req.body)
-    const datosProducto=req.body
-    console.log("llaves ", Object.keys(datosProducto))
-
-   //////// test de validacion 
-
-/*     if( Object.keys(datosProducto).includes('idProducto') ) 
-      {
-        res.sendStatus(200);
-      }
-      else{
+    
+    
+    try {
+      if (
+        Object.keys(datosProducto).includes('idProducto') &&
+        Object.keys(datosProducto).includes('descripcionProducto') &&
+        Object.keys(datosProducto).includes('valorProducto') &&
+        Object.keys(datosProducto).includes('inventarioProducto')
+      ) {
+        // implementar código para crear vehículo en la BD
+        conexion.collection('producto').insertOne(datosProducto, (err, result) => {
+          if (err) {
+            console.error(err);
+            res.sendStatus(500);
+          } else {
+            console.log(result);
+            res.sendStatus(200);
+          }
+        });
+      } else {
         res.sendStatus(500);
-      } */
-
-///////////
-
-
-    console.log("desde -> ", req.hostname)
-    res.send("ok, Producto creado")
-
-})
+      }
+    } catch {
+      res.sendStatus(500);
+    }
+  });
 
 
 
-app.listen(5000,()=>{
-    console.log("escuchando en puerto 5000 ")
-})
+/* app.patch(('/productos/editar', (req, res) => {
+
+    edicion 
+
+
+}) */
+
+
+
+//ciclo 
+
+const main = () => {
+    client.connect((err, db) => {
+      if (err) {
+        console.error('Error conectando a la base de datos');
+        return 'error';
+      }
+      conexion = db.db('ProyectoPizzeria');
+      console.log('baseDeDatos exitosa');
+      return app.listen(5000, () => {
+        console.log('escuchando puerto 5000');
+      });
+    });
+  };
+  
+  main();
+
+
+    
+
