@@ -5,6 +5,7 @@ import Express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 
 import cors from 'cors';
+import { ObjectID } from 'bson';
 
 
 
@@ -84,13 +85,50 @@ app.post('/productos/nuevo', (req, res) => {
 
 
 
-/* app.patch(('/productos/editar', (req, res) => {
+app.patch('/productos/edita', (req, res) => {
 
-    edicion 
+    const datosEdita = req.body;
+    console.log(datosEdita)
+    const idEdita = {_id: new ObjectId(datosEdita.id)} // es el filtro para ubicar el coso a borrar 
+    delete datosEdita.id
+    const atomicOperation = {$set:datosEdita,}
+    conexion.collection('producto').findOneAndUpdate(idEdita,atomicOperation,{upsert:true,returnOriginal:true} , (err,result) =>{
+
+        if(err){
+            console.error("error en la edicion del producto" , err)
+            res.sendStatus(500)
+        }
+        else{
+            console.error("editado con exito :D" )
+            res.sendStatus(200)
+        }
+    
+    });  
 
 
-}) */
+}); 
 
+app.delete('/productos/borra', (req, res) => {
+
+    const datosBorra = req.body;
+    console.log(datosBorra)
+    const idBorra = {_id: new ObjectId(datosBorra.id)} // es el filtro para ubicar el coso a borrar 
+    conexion.collection("producto").deleteOne(idBorra,(err,result)=>{
+
+        if(err){
+            console.error("error al deletear producto" , err)
+            res.sendStatus(500)
+
+        }
+        else{
+            console.error("error al deletear producto" , err)
+            res.sendStatus(200)
+        }
+    });
+
+
+
+}); 
 
 
 //ciclo 
