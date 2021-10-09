@@ -21,8 +21,10 @@ const crearUsuario = async (datosUsuario,callback) =>{
     
 
       if (
-        Object.keys(datosUsuario).includes('idUsuario') &&
         Object.keys(datosUsuario).includes('nombreUsuario') &&
+        Object.keys(datosUsuario).includes('numerodeIdentificacion') &&
+        Object.keys(datosUsuario).includes('correoElectronico') &&
+        Object.keys(datosUsuario).includes('password') &&
         Object.keys(datosUsuario).includes('rolUsuario') 
         
       ) {
