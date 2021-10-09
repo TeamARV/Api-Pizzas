@@ -6,6 +6,8 @@ import { conectarBaseDatos, obtenerBaseDatos } from './db/db.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import rutasProducto from './vistas/productos/rutas.js';
+import rutasUsuario from './vistas/usuarios/rutas.js';
+import rutasVenta from './vistas/ventas/rutas.js';
 
 
 dotenv.config({ path: './datos.env' });
@@ -20,6 +22,8 @@ app.use(cors());         // inicializo el cors que me permite peticiones de fuen
 // opciones orm :  mongoose, prisma // pero vamos usar nativo de mongodb driver
 
 app.use(rutasProducto)
+app.use(rutasUsuario)
+app.use(rutasVenta)
 
 
 

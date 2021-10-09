@@ -1,5 +1,5 @@
 import Express from 'express';
-import { queryAllProductos , crearProducto, editarProducto, deletearProducto, editarProductoPorID } from '../../controladores/productos/controlador.js';
+import { queryAllProductos , crearProducto, editarProducto, deletearProducto, editarProductoPorID, traerONEproduct } from '../../controladores/productos/controlador.js';
 
 
 const rutasProducto = Express.Router(); 
@@ -14,6 +14,15 @@ const respuestagenericacallback = (res) =>(err,result) =>{
         }
 };
 
+////////////
+
+rutasProducto.route("/productos/:id").get((req,res)=>{
+  console.log("alguien hizo get en la ruta /productos")
+  traerONEproduct(req.params.id,respuestagenericacallback(res));
+
+});
+
+/////////////
 rutasProducto.route("/productos").get((req,res)=>{
     console.log("alguien hizo get en la ruta /productos")
     queryAllProductos(respuestagenericacallback(res));

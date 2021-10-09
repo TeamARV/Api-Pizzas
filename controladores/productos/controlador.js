@@ -3,10 +3,18 @@ import { ObjectId } from 'mongodb';
 
 
 
+
 const queryAllProductos = async (callback)=>{
     const conexion = obtenerBaseDatos()
     await conexion.collection("producto").find({}).limit(100).toArray(callback);
+    //en el find puedo meter filtros estado:"pendiente"
 };
+
+
+const traerONEproduct = async ( id,callback) =>{
+  const conexion = obtenerBaseDatos()
+  await conexion.collection("producto").findOne({_id: new ObjectId(id)},callback);
+}
 
 
 const crearProducto = async (datosProducto,callback) =>{
@@ -67,4 +75,4 @@ const deletearProducto = async (id, callback) =>{
 
 
 
-export {queryAllProductos,crearProducto,editarProducto,deletearProducto,editarProductoPorID};
+export {queryAllProductos,crearProducto,editarProducto,deletearProducto,editarProductoPorID,traerONEproduct};
