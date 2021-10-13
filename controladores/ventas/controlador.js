@@ -21,10 +21,10 @@ const crearVenta = async (datosVenta,callback) =>{
     
 
       if (
-        Object.keys(datosVenta).includes('idVenta') &&
+        Object.keys(datosVenta).includes('idVendedor') &&
         Object.keys(datosVenta).includes('descripcionVenta') &&       //aqui voy editar segun la tabla que quiero
         Object.keys(datosVenta).includes('valorVenta') &&
-        Object.keys(datosVenta).includes('inventarioVenta')
+        Object.keys(datosVenta).includes('estadoVenta')
       ) {
         // implementar código para crear vehículo en la BD
         const conexion = obtenerBaseDatos()
