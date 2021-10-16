@@ -28,7 +28,7 @@ const crearUsuario = async (datosUsuario,callback) =>{
         Object.keys(datosUsuario).includes('rolUsuario') 
         
       ) {
-        // implementar código para crear vehículo en la BD
+        // implementar código para crear  en la BD
         const conexion = obtenerBaseDatos()
         await conexion.collection('usuario').insertOne(datosUsuario, callback) 
        

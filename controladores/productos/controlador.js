@@ -26,7 +26,7 @@ const crearProducto = async (datosProducto,callback) =>{
         Object.keys(datosProducto).includes('valorProducto') &&
         Object.keys(datosProducto).includes('inventarioProducto')
       ) {
-        // implementar código para crear vehículo en la BD
+        // implementar código para crear  en la BD
         const conexion = obtenerBaseDatos()
         await conexion.collection('producto').insertOne(datosProducto, callback) 
        

@@ -8,9 +8,11 @@ import dotenv from 'dotenv';
 import rutasProducto from './vistas/productos/rutas.js';
 import rutasUsuario from './vistas/usuarios/rutas.js';
 import rutasVenta from './vistas/ventas/rutas.js';
+import rutasEstado from './vistas/estado/rutas.js';
 
 
 dotenv.config({ path: './datos.env' });
+
 
 
 
@@ -24,6 +26,7 @@ app.use(cors());         // inicializo el cors que me permite peticiones de fuen
 app.use(rutasProducto)
 app.use(rutasUsuario)
 app.use(rutasVenta)
+app.use(rutasEstado)
 
 
 
