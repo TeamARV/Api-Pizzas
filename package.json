@@ -6,6 +6,7 @@
   "author": "TeamARV <andresriveravega@msn.com>",
   "license": "MIT",
   "type": "module",
+
   "scripts": {
     "start": "node servidorPizza.js"
   },
