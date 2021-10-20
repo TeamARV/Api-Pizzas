@@ -25,6 +25,7 @@ const client = new MongoClient(stringConexion, {
 
 let conexion;
 const app = Express()
+const port =  5000
 
 app.use(Express.json())  // agregar utilidad para manejar json
 app.use(cors());         // inicializo el cors que me permite peticiones de fuentes distintas
@@ -140,7 +141,7 @@ const main = () => {
       }
       conexion = db.db('ProyectoPizzeria');
       console.log('baseDeDatos exitosa');
-      return app.listen(5000, () => {
+      return app.listen(port, () => {
         console.log('escuchando puerto 5000');
       });
     });
