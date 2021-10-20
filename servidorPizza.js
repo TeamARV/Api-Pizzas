@@ -29,11 +29,11 @@ app.use(rutasVenta)
 app.use(rutasEstado)
 
 
-
+/* process.env.port */
 
 const main = () => {
-  return app.listen(process.env.port, () => {
-    console.log(`escuchando puerto ${process.env.port}`);
+  return app.listen(5000, () => {
+    console.log(`escuchando puerto 5000`);
     });
   };
   
