@@ -13,7 +13,7 @@ import rutasEstado from './vistas/estado/rutas.js';
 
 dotenv.config({ path: './datos.env' });
 
-const port = process.env.port || 5000;
+const port = process.env.PORT || 8080;
 
 
 const app = Express()
